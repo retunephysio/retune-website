@@ -132,6 +132,21 @@ section{padding-block:72px}
 .principles div{display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--line);padding-top:16px}
 .principles p{color:var(--muted)}
 .quote{font-family:var(--display);font-weight:600;color:var(--sage-ink)}
+.pillar{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--sage-ink)}
+.principles + .fine{margin-top:28px}
+/* identity */
+.identity .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:center}
+@media (max-width:760px){.identity .wrap{grid-template-columns:minmax(0,1fr)}}
+.identity .stack{display:flex;flex-direction:column;gap:16px}
+.identity .stack p{color:var(--muted)}
+.proof{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px}
+.proof .k{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--muted)}
+.proof .goal{background:var(--band);border-radius:12px;padding:10px 14px;font-size:.95rem}
+.proof .goal b{display:block;font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--sage-ink)}
+.proof ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.proof li{display:flex;gap:10px;align-items:baseline}
+.proof li::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--sage);transform:translateY(-1px)}
+.proof .big{font-family:var(--display);font-weight:600;color:var(--sage-ink)}
 
 /* physios */
 .physio .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center}
@@ -203,8 +218,8 @@ footer .stack{display:flex;flex-direction:column;gap:6px}
     <div class="wrap">
       <div class="hero-copy">
         <span class="eyebrow">For life after your last appointment</span>
-        <h1>Keep your rehab going <em>on your own.</em></h1>
-        <p class="lede">Retune turns the exercises from your physio into a simple daily routine you can stick with. Tie them to something you already do, tick them off, and take a summary back to your physio when you need a review.</p>
+        <h1>The appointments stop. <em>Your progress doesn't have to.</em></h1>
+        <p class="lede">Exercise doesn't come naturally to everyone. Once physio ends, the routine is up to you, and Retune makes it easier to keep going. It turns your physio's exercises into a small routine tied to your day, so it doesn't rely on willpower.</p>
         <div class="ctas">
           <a class="btn" href="#pilot">Join the pilot</a>
           <a class="btn ghost" href="#how">See how it works</a>
@@ -218,7 +233,7 @@ footer .stack{display:flex;flex-direction:column;gap:6px}
           <div class="dots" aria-hidden="true">
             <span><i class="dot on"></i>M</span><span><i class="dot on"></i>T</span><span><i class="dot today"></i>W</span><span><i class="dot"></i>T</span><span><i class="dot"></i>F</span><span><i class="dot"></i>S</span><span><i class="dot"></i>S</span>
           </div>
-          <p><b>2 for 2</b> this week. You're on a roll.</p>
+          <p><b>2 of 2</b> done this week. Nice work.</p>
         </div>
         <div class="pcard done">
           <div class="row"><span class="circ" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg></span><div><div class="a">After I pour my morning coffee</div><div class="n">Morning supplements</div></div></div>
@@ -242,10 +257,11 @@ footer .stack{display:flex;flex-direction:column;gap:6px}
         <span class="eyebrow">The gap Retune fills</span>
         <h2>The hard part starts when the appointments stop.</h2>
         <p class="lede">In the clinic you have a plan, someone checking in, and a reason to keep going. Once you're discharged, the exercise sheet goes on the fridge and life gets busy. Retune is built for that stretch.</p>
+        <p>People who've always exercised usually keep going. It's part of who they are, and it slots into their week without much thought. If it isn't part of yours yet, every session is a decision, and decisions run out. That's not a willpower problem. The habit just doesn't exist yet.</p>
       </div>
       <div class="timeline" aria-label="A typical rehab journey">
         <div><b>In the clinic</b><span>Your physio sets the plan and checks your progress.</span></div>
-        <div class="drop"><b>After discharge</b><span>No more appointments. The routine is up to you, and it's easy to let it slide.</span></div>
+        <div class="drop"><b>After discharge</b><span>No more appointments. The routine is up to you, and if exercise isn't already a habit, it's easy to let it slide.</span></div>
         <div class="re"><b>With Retune</b><span>A small daily routine, a short version for busy or sore days, and a summary ready for your next review.</span></div>
       </div>
     </div>
@@ -258,7 +274,7 @@ footer .stack{display:flex;flex-direction:column;gap:6px}
         <h2>Four steps, about a minute to set up.</h2>
       </div>
       <div class="steps">
-        <div class="step"><h3>Add your exercises</h3><p>Type them in, or take a photo of your exercise sheet and check what Retune reads.</p></div>
+        <div class="step"><h3>Add your exercises</h3><p>Type them in, or take a photo of your exercise sheet and check what Retune reads. Add your own goals too, like a walk or the gym.</p></div>
         <div class="step"><h3>Fit them into your day</h3><p>Pick your days and a time, or tie them to something you already do, like your morning coffee.</p></div>
         <div class="step"><h3>Tick them off</h3><p>One tap when you're done. On busy or sore days, the short version still counts.</p></div>
         <div class="step"><h3>See your weeks add up</h3><p>Track how consistent you've been, with optional pain scores, and share a summary with your physio.</p></div>
@@ -269,14 +285,36 @@ footer .stack{display:flex;flex-direction:column;gap:6px}
   <section class="band">
     <div class="wrap">
       <div class="head">
-        <span class="eyebrow">Built around how habits stick</span>
-        <h2>Designed for real weeks, not perfect ones.</h2>
+        <span class="eyebrow">Built on how habits form</span>
+        <h2>Four ways Retune helps it stick.</h2>
       </div>
       <div class="principles">
-        <div><h3>Tie it to a cue</h3><p class="quote">"After I pour my morning coffee…"</p><p>Linking a new routine to something you already do every day is one of the most reliable ways to build a habit. Pick from dozens of everyday cues or write your own.</p></div>
-        <div><h3>A short version for bad days</h3><p>Tired, sore or short on time? Do one set of each and it still counts. Keeping the routine alive matters more than a perfect session.</p></div>
-        <div><h3>No guilt, no streak anxiety</h3><p>Missing a day doesn't wipe your progress. Retune shows what you've done, not what you've missed, and helps you get back to it.</p></div>
-        <div><h3>Your own goals too</h3><p>Add a walk, the gym, stretching or a daily supplement alongside your physio's plan, each with its own days and cue.</p></div>
+        <div><span class="pillar">Make it obvious</span><h3>Tie it to something you already do</h3><p class="quote">"After I pour my morning coffee…"</p><p>Linking a routine to an everyday cue is one of the most reliable ways to build a habit. Add a time, a reminder or a calendar event too.</p></div>
+        <div><span class="pillar">Make it attractive</span><h3>Start with what it's for</h3><p class="quote">"Long walks with the dog."</p><p>Write what you want to get back to, in your own words. Retune keeps it in view, so each session connects to something you care about.</p></div>
+        <div><span class="pillar">Make it easy</span><h3>A short version still counts</h3><p>Tired, sore or short on time? Do one set of each and it counts. Keeping the routine alive matters more than a perfect session.</p></div>
+        <div><span class="pillar">Make it satisfying</span><h3>Feel it add up</h3><p>One tap when you're done, a quick "how did that feel?", and a week that fills in. Missing a day doesn't wipe anything. Retune shows what you've done, not what you've missed.</p></div>
+      </div>
+      <p class="fine">Based on habit research, including work by Lally and Gardner on how habits form through repetition in a consistent context.</p>
+    </div>
+  </section>
+
+  <section class="identity">
+    <div class="wrap">
+      <div class="stack">
+        <span class="eyebrow">Small proof, not big promises</span>
+        <h2>You don't have to believe it yet.</h2>
+        <p class="lede">Confidence comes from proof, not pep talks. Retune quietly collects it: the sessions you've done, the weeks you did more than you planned, how far you've come since you started. Over time, the evidence does the convincing.</p>
+        <p>And once the habit is automatic, Retune is designed to step back, with fewer reminders and a weekly check-in instead of a daily one. Most apps want you to open them more. We'd rather you didn't need to.</p>
+      </div>
+      <div class="proof" aria-label="Example of the Retune Progress screen">
+        <span class="k">Progress</span>
+        <div class="goal"><b>Building towards</b>Long walks with the dog</div>
+        <ul>
+          <li><span><span class="big">24 sessions</span> since August</span></li>
+          <li><span><span class="big">3 weeks</span> where you did more than you planned</span></li>
+          <li><span>Most sessions felt <span class="big">good or OK</span></span></li>
+        </ul>
+        <p class="fine">Example. No streaks, badges or points.</p>
       </div>
     </div>
   </section>
@@ -286,7 +324,7 @@ footer .stack{display:flex;flex-direction:column;gap:6px}
       <div class="stack">
         <span class="eyebrow">For physiotherapists</span>
         <h2>Keep patients connected to the plan you gave them.</h2>
-        <p class="lede">Retune doesn't replace you. It helps your patients keep doing what you prescribed, and brings them back to you with something useful when it's time for a review.</p>
+        <p class="lede">Retune doesn't replace you. Your naturally active patients often don't need much help. Retune is for the ones who do: it helps them keep doing what you prescribed, and brings them back to you with something useful when it's time for a review.</p>
         <ul>
           <li>Patients enter your program as written. Changing a dose asks them to confirm they're going against your plan.</li>
           <li>A one-screen summary shows sessions completed, the weekly pattern, pain trend and current exercises.</li>
@@ -329,7 +367,7 @@ footer .stack{display:flex;flex-direction:column;gap:6px}
         <div style="display:flex;flex-direction:column;gap:14px">
           <span class="eyebrow">Pilot program</span>
           <h2>Join the Retune pilot.</h2>
-          <p>We're testing Retune with a small group of people who've recently finished physio, and a few physiotherapists. It's free during the pilot, and your feedback shapes what we build next.</p>
+          <p>We're testing Retune with a small group of people who've recently finished physio, and a few physiotherapists. It's free during the pilot, and your feedback shapes what we build next. We'd especially like to hear from people who've never stuck with exercise before.</p>
         </div>
         <div class="mail">
           <span class="muted" style="font-size:.9rem">Email us to join:</span>

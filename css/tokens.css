@@ -1,0 +1,25 @@
+/* Design tokens: copied unchanged from the live site. */
+:root{
+  --bg:#f7f5f0; --card:#ffffff; --band:#eef2ea; --line:#e4dfd5;
+  --ink:#2b2b2b; --muted:#5e5a54;
+  --sage:#7c9473; --sage-block:#637a5a; --sage-ink:#3c4e37; --on-sage:#f7f5f0;
+  --btn:#4f6448; --on-btn:#f7f5f0;
+  --terra:#c97b5e; --terra-ink:#9e5236; --terra-tint:#f3e6df;
+  --display:"Poppins","Archivo Black",system-ui,sans-serif;
+  --sans:"Work Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --shadow:0 24px 60px -24px rgba(60,78,55,.35);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#191b18; --card:#232621; --band:#20251f; --line:#33372f;
+  --ink:#ece8df; --muted:#aaa59a;
+  --sage:#8fa885; --sage-block:#4d6146; --sage-ink:#bcd3b0; --on-sage:#f2efe8;
+  --btn:#a7bf9b; --on-btn:#161815;
+  --terra:#d38f74; --terra-ink:#e7a88e; --terra-tint:#3a2a22;
+  --shadow:0 24px 60px -24px rgba(0,0,0,.6); color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#191b18; --card:#232621; --band:#20251f; --line:#33372f;
+  --ink:#ece8df; --muted:#aaa59a;
+  --sage:#8fa885; --sage-block:#4d6146; --sage-ink:#bcd3b0; --on-sage:#f2efe8;
+  --btn:#a7bf9b; --on-btn:#161815;
+  --terra:#d38f74; --terra-ink:#e7a88e; --terra-tint:#3a2a22;
+  --shadow:0 24px 60px -24px rgba(0,0,0,.6); color-scheme:dark }

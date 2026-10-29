@@ -15,7 +15,7 @@
    Applied only while html.motion is set (boot.js sets it; motion.js removes it if anything goes wrong).
    motion.js adds .is-in when an element has finished animating, which hands control back to normal CSS.
    Opacity only here (never visibility), so keyboard users can still tab into content below the fold. */
-html.motion .hero-copy > *:not(.is-in),
+/* Hero copy stays visible from the first paint (it only slides), so the main text is not held back. */
 html.motion .hero .phone:not(.is-in),
 html.motion [data-reveal]:not(.is-in),
 html.motion [data-stagger] > *:not(.is-in){

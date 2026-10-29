@@ -69,7 +69,7 @@ ${extra}</head>
 <body>
 <header class="top">
   <div class="wrap">
-    <a href="/" style="text-decoration:none"><span class="wordmark" role="img" aria-label="Retune">RETUN<span class="bars" aria-hidden="true"><i></i><i></i><i></i></span></span></a>
+    <a class="home-link" href="/"><span class="wordmark" role="img" aria-label="Retune">RETUN<span class="bars" aria-hidden="true"><i></i><i></i><i></i></span></span></a>
     <nav aria-label="Main">
       <a class="hide-sm" href="/#how">How it works</a>
       <a href="/learn/">Learn</a>
@@ -105,7 +105,7 @@ const APP_BOX = `<aside class="app-box" aria-labelledby="app-box-h">
 
 const DISCLAIMER = `<aside class="disclaimer" aria-label="About this information">
   <b>General information, not medical advice</b>
-  This page explains what research has found in general. It isn't advice about your situation and doesn't replace your physio, doctor or other health professional. If pain is getting worse, or you're not sure an exercise is right for you, stop and check with them. In an emergency, call 000.
+  This page explains what research has found in general. It isn't advice about your situation and doesn't replace your physio, doctor or other health professional. If pain is getting worse, or you're not sure an exercise is right for you, stop and check with them.
 </aside>`;
 
 function articlePage(a, all) {
@@ -147,7 +147,7 @@ function articlePage(a, all) {
       extra: `<meta property="article:published_time" content="${a.published}">\n<meta property="article:modified_time" content="${a.updated}">\n<script type="application/ld+json">${jsonLd(ld)}</script>\n`,
     }) +
     `<main>
-<nav class="crumbs wrap" aria-label="Breadcrumb" style="max-width:760px"><a href="/">Home</a><span aria-hidden="true">›</span><a href="/learn/">Learn</a></nav>
+<nav class="crumbs wrap" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">›</span><a href="/learn/">Learn</a></nav>
 <article class="article">
   <div class="wrap">
     <header class="art-head">
@@ -155,7 +155,7 @@ function articlePage(a, all) {
       <h1>${esc(a.title)}</h1>
       <p class="byline">${reviewed ? `<span>Written and reviewed by a ${esc(a.reviewedBy)}</span><span>Reviewed <time datetime="${a.reviewedOn}">${fmtDate(a.reviewedOn)}</time></span>` : '<span>By Retune Physio</span>'}<span>Updated <time datetime="${a.updated}">${fmtDate(a.updated)}</time></span></p>
     </header>
-    <section class="summary-box" aria-labelledby="sum-h" style="padding-block:18px">
+    <section class="summary-box" aria-labelledby="sum-h">
       <h2 id="sum-h">In short</h2>
       <ul>${a.summary.map((s) => `<li>${s}</li>`).join('')}</ul>
     </section>
@@ -163,7 +163,7 @@ function articlePage(a, all) {
 ${a.body}
     </div>
     ${APP_BOX}
-    <section class="refs" aria-labelledby="refs-h" style="padding-block:20px 0">
+    <section class="refs" aria-labelledby="refs-h">
       <h2 id="refs-h">Research referred to</h2>
       <ol>${a.references.map((r, i) => `<li id="ref-${i + 1}">${esc(r.text)} <a href="${esc(r.url)}" rel="noopener">${esc(r.url.replace(/^https?:\/\//, ''))}</a></li>`).join('')}</ol>
     </section>
@@ -197,7 +197,7 @@ function indexPage(all) {
     }) +
     `<main>
 <section class="article">
-  <div class="wrap" style="max-width:900px">
+  <div class="wrap wide">
     <header class="art-head">
       <span class="eyebrow">Learn</span>
       <h1>Keeping your exercise going</h1>

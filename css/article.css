@@ -1,6 +1,6 @@
 /* Learn section: article pages and the Learn index. Uses the same tokens as the home page. */
 /* No inline styles anywhere: the site's Content-Security-Policy (netlify.toml) blocks them. */
-.home-link{text-decoration:none}
+.home-link{display:flex;align-items:center;text-decoration:none}
 .crumbs{font-size:.88rem;color:var(--muted);padding-top:28px;max-width:760px}
 .crumbs a{color:var(--muted)}
 .crumbs span[aria-hidden]{margin-inline:6px}

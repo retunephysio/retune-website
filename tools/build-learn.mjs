@@ -6,6 +6,7 @@
 //   <script type="application/json" id="meta">{ ...see FIELDS below... }</script>
 //   <p>Body...</p>
 //
+// reviewedBy is the reviewer's description, e.g. "registered physiotherapist" (shown as "Written and reviewed by a ...").
 // FIELDS: slug, title, seoTitle (<= 60 chars), description (<= 160 chars), published, updated (YYYY-MM-DD),
 //         reviewedBy (string or null), reviewedOn (YYYY-MM-DD or null), summary [strings],
 //         related [slugs], references [{ text, url }].
@@ -152,7 +153,7 @@ function articlePage(a, all) {
     <header class="art-head">
       <span class="eyebrow">What the research says</span>
       <h1>${esc(a.title)}</h1>
-      <p class="byline"><span>By Retune Physio</span>${reviewed ? `<span>Reviewed by a ${esc(a.reviewedBy)} on ${fmtDate(a.reviewedOn)}</span>` : ''}<span>Updated <time datetime="${a.updated}">${fmtDate(a.updated)}</time></span></p>
+      <p class="byline">${reviewed ? `<span>Written and reviewed by a ${esc(a.reviewedBy)}</span><span>Reviewed <time datetime="${a.reviewedOn}">${fmtDate(a.reviewedOn)}</time></span>` : '<span>By Retune Physio</span>'}<span>Updated <time datetime="${a.updated}">${fmtDate(a.updated)}</time></span></p>
     </header>
     <section class="summary-box" aria-labelledby="sum-h" style="padding-block:18px">
       <h2 id="sum-h">In short</h2>
@@ -201,6 +202,7 @@ function indexPage(all) {
       <span class="eyebrow">Learn</span>
       <h1>Keeping your exercise going</h1>
       <p class="lede">Plain-English guides on building an exercise habit and keeping up your rehab once appointments finish. Each one explains what published research has found, with the sources listed.</p>
+      <p class="fine">How these are written: each guide is written and reviewed by a registered physiotherapist, uses published research (listed at the end of each page), and is checked again when the "Updated" date changes. They're general information, not advice about your situation.</p>
     </header>
     <ul class="learn-list">
 ${all.map((a) => `      <li><a href="/learn/${a.slug}/"><h2>${esc(a.title)}</h2><p>${esc(a.description)}</p><span class="meta">Updated ${fmtDate(a.updated)}</span></a></li>`).join('\n')}

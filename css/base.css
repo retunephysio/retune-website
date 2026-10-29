@@ -25,7 +25,8 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background
 header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px}
 header.top nav{display:flex;align-items:center;gap:18px}
 header.top nav a:not(.btn){text-decoration:none;color:var(--muted);font-size:.95rem}
-header.top .btn{min-height:44px;padding:0 16px;font-size:.95rem}
+header.top .btn{min-height:44px;padding:0 16px;font-size:.95rem;white-space:nowrap}
+@media (max-width:380px){header.top nav{gap:12px}header.top .btn{padding:0 12px}}
 @media (max-width:640px){header.top nav a.hide-sm{display:none}}
 
 section{padding-block:72px}

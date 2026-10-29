@@ -1,6 +1,6 @@
 # retune-website
 
-The one-page website for **retunephysio.com.au**.
+The website for **retunephysio.com.au**: the home page plus the Learn section.
 
 - `index.html`: the whole page (markup only).
 - `css/tokens.css`: design tokens (colours, fonts, shadow), light and dark.
@@ -12,6 +12,10 @@ The one-page website for **retunephysio.com.au**.
 - `js/main.js`: the cue builder and the "Copy email address" button (both work without animation).
 - `vendor/`: self-hosted GSAP (see `vendor/README.md`).
 - `netlify.toml`: Netlify settings (no build step, security headers).
+- `css/article.css`: Learn pages.
+- `content/learn/*.html`: Learn articles (a JSON meta block, then the body). Source of truth for articles.
+- `tools/build-learn.mjs`: builds `learn/` and `sitemap.xml` from `content/learn/`. Run `node tools/build-learn.mjs` and commit the output (Netlify still has no build step).
+- `robots.txt`, `sitemap.xml`, `404.html`, `img/og.png` (share image), `img/logo.png`.
 
 ## How it goes live
 Netlify watches this repository. Every change pushed to `main` is published to retunephysio.com.au automatically.
@@ -22,5 +26,6 @@ Netlify watches this repository. Every change pushed to `main` is published to r
 - Hover effects are CSS transitions and only apply on devices with a mouse.
 
 ## Rules
+- Learn articles: general research only, every claim sourced, calls to action describe Retune as a habit tool (never treating or monitoring a condition; see `claude/tga-assessment.md` in the Claude Project). The byline says "Reviewed by" only after Adam's clinical review (`reviewedBy`, `reviewedOn`).
 - Marketing copy must follow AHPRA advertising rules: no testimonials, no unproven outcome claims, clear terms on any offer.
 - Never commit passwords, API keys or any patient data.

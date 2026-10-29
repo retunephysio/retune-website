@@ -1,15 +1,19 @@
 /* Learn section: article pages and the Learn index. Uses the same tokens as the home page. */
-.crumbs{font-size:.88rem;color:var(--muted);padding-top:28px}
+/* No inline styles anywhere: the site's Content-Security-Policy (netlify.toml) blocks them. */
+.home-link{text-decoration:none}
+.crumbs{font-size:.88rem;color:var(--muted);padding-top:28px;max-width:760px}
 .crumbs a{color:var(--muted)}
 .crumbs span[aria-hidden]{margin-inline:6px}
 
 .article{padding-block:20px 64px}
 .article .wrap{max-width:760px}
+.article .wrap.wide{max-width:900px}
+.notfound{display:flex;flex-direction:column;gap:18px;padding-top:56px}
 .article header.art-head{display:flex;flex-direction:column;gap:14px;margin-bottom:28px}
 .article h1{font-size:clamp(2rem,5vw,2.8rem);line-height:1.1}
 .byline{font-size:.9rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 14px}
 
-.summary-box{background:var(--band);border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;gap:8px;margin-bottom:32px}
+section.summary-box{background:var(--band);border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;gap:8px;margin-bottom:32px}
 .summary-box h2{font-size:1rem;letter-spacing:.06em;text-transform:uppercase;font-family:var(--sans);font-weight:600;color:var(--sage-ink)}
 .summary-box ul{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:6px}
 
@@ -26,7 +30,7 @@
 .app-box p{color:var(--on-sage)}
 .app-box .btn{align-self:flex-start;background:var(--card);color:var(--ink)}
 
-.refs{margin-top:36px;border-top:1px solid var(--line);padding-top:20px;font-size:.9rem;color:var(--muted)}
+section.refs{margin-top:36px;border-top:1px solid var(--line);padding:20px 0 0;font-size:.9rem;color:var(--muted)}
 .refs h2{font-size:1.05rem;margin-bottom:10px;color:var(--ink)}
 .refs ol{margin:0;padding-left:1.3em;display:flex;flex-direction:column;gap:8px}
 .refs a{word-break:break-word}

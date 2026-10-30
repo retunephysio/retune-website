@@ -7,7 +7,7 @@
 //   <p>Body...</p>
 //
 // reviewedBy is the reviewer's description, e.g. "registered physiotherapist" (shown as "Written and reviewed by a ...").
-// FIELDS: slug, title, seoTitle (<= 60 chars), description (<= 160 chars), published, updated (YYYY-MM-DD),
+// FIELDS: eyebrow (optional, default "What the research says"), slug, title, seoTitle (<= 60 chars), description (<= 160 chars), published, updated (YYYY-MM-DD),
 //         reviewedBy (string or null), reviewedOn (YYYY-MM-DD or null), summary [strings],
 //         related [slugs], references [{ text, url }].
 // The byline only says "Reviewed by ..." when reviewedBy and reviewedOn are both set.
@@ -151,7 +151,7 @@ function articlePage(a, all) {
 <article class="article">
   <div class="wrap">
     <header class="art-head">
-      <span class="eyebrow">What the research says</span>
+      <span class="eyebrow">${esc(a.eyebrow || 'What the research says')}</span>
       <h1>${esc(a.title)}</h1>
       <p class="byline">${reviewed ? `<span>Written and reviewed by a ${esc(a.reviewedBy)}</span><span>Reviewed <time datetime="${a.reviewedOn}">${fmtDate(a.reviewedOn)}</time></span>` : '<span>By Retune Physio</span>'}<span>Updated <time datetime="${a.updated}">${fmtDate(a.updated)}</time></span></p>
     </header>

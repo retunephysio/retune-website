@@ -240,23 +240,51 @@
         <div class="pilot-copy">
           <span class="eyebrow">Pilot program</span>
           <h2>Join the Retune pilot.</h2>
-          <p>We're testing Retune with a small group of people who've recently finished physio, and a few physiotherapists. It's free during the pilot, and your feedback shapes what we build next. We'd especially like to hear from people who've never stuck with exercise before.</p>
+          <p>We're testing Retune with a small group of people who've recently finished physio, and a few physiotherapists. It's free, and we plan to always keep a free version. Your feedback shapes what we build next. We'd especially like to hear from people who've never stuck with exercise before.</p>
+          <p>Places are limited, and the pilot starts on Android phones. We'll reply to everyone.</p>
         </div>
-        <div class="mail">
-          <span class="muted lbl">Email us to join:</span>
-          <span class="addr" id="addr">hello@retunephysio.com.au</span>
-          <div class="row">
-            <button type="button" class="copy" id="copy-btn">Copy email address</button>
-            <a class="btn" href="mailto:hello@retunephysio.com.au?subject=Retune%20pilot">Open email</a>
+        <form class="signup" name="pilot" method="POST" action="/pilot/thanks/" data-netlify="true" netlify-honeypot="company">
+          <input type="hidden" name="form-name" value="pilot">
+          <p class="hp" hidden><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+          <div class="field">
+            <label for="f-name">First name</label>
+            <input id="f-name" name="first-name" type="text" required maxlength="40" autocomplete="given-name">
           </div>
-          <p id="copied" role="status" aria-live="polite"></p>
-          <ul>
-            <li>Tell us whether you're a patient or a physio.</li>
-            <li>Patients: roughly when you finished physio.</li>
-            <li>The pilot is for adults (18 and over).</li>
-            <li>Please don't send medical details by email.</li>
-          </ul>
-        </div>
+          <div class="field">
+            <label for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" required maxlength="120" autocomplete="email">
+          </div>
+          <fieldset class="field">
+            <legend>Your phone</legend>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="phone" value="Android" required> Android</label>
+              <label class="choice"><input type="radio" name="phone" value="iPhone"> iPhone</label>
+            </div>
+          </fieldset>
+          <div class="field">
+            <label for="f-play">Google Play email <span class="opt">(Android, if different)</span></label>
+            <input id="f-play" name="play-email" type="email" maxlength="120" autocomplete="off">
+          </div>
+          <fieldset class="field">
+            <legend>I'm a</legend>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="role" value="Patient" required> Patient</label>
+              <label class="choice"><input type="radio" name="role" value="Physio"> Physio</label>
+              <label class="choice"><input type="radio" name="role" value="Other"> Other</label>
+            </div>
+          </fieldset>
+          <div class="field">
+            <label for="f-finished">Roughly when you finished physio <span class="opt">(optional)</span></label>
+            <input id="f-finished" name="finished-physio" type="text" maxlength="30" placeholder="For example, August 2026">
+          </div>
+          <div class="field">
+            <label for="f-heard">How you heard about Retune <span class="opt">(optional)</span></label>
+            <input id="f-heard" name="heard-about" type="text" maxlength="60">
+          </div>
+          <label class="tick"><input type="checkbox" name="adult" value="yes" required> I'm 18 or over</label>
+          <p class="notice">We use these details only to reply to you and invite you to the pilot. They're stored by our website host, Netlify, in the United States, and emailed to us. Please don't include medical details. See our <a href="/privacy/">Privacy Policy</a>.</p>
+          <button class="btn" type="submit">Ask to join</button>
+        </form>
       </div>
     </div>
   </section>
@@ -269,6 +297,7 @@
       <span>Retune Physio · ABN 75 662 599 148</span>
       <span>hello@retunephysio.com.au</span>
       <span><a href="/learn/">Learn: guides on exercise habits</a></span>
+      <span><a href="/privacy/">Privacy Policy</a> · <a href="/terms/">Terms of Use</a></span>
     </div>
     <div class="stack narrow">
       <span>Retune is a general wellness app that helps adults build and keep an exercise habit. It doesn't diagnose, monitor or treat any condition, and it doesn't replace your physio or doctor. If your pain is getting worse or you're unsure about an exercise, stop and check with your physio or GP.</span>

@@ -20,6 +20,7 @@ a{color:var(--sage-ink)}
 .wordmark .bars{display:inline-block;vertical-align:baseline;width:.58em;height:.702em;margin-left:.06em}
 .wordmark .bars i{display:block;height:.176em;background:var(--sage)}
 .wordmark .bars i+i{margin-top:.087em}
+.wordmark .bars i:nth-child(2){background:var(--terra)} /* middle bar terracotta, like the app icon (31 Oct 2026) */
 
 header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px}

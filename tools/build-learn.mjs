@@ -1,4 +1,5 @@
-// Builds the Learn section from content/learn/*.html, plus sitemap.xml.
+// Builds the Learn section from content/learn/*.html, the Privacy Policy and Terms of Use from content/legal/*.md,
+// the pilot sign-up thanks page, and sitemap.xml.
 // No dependencies: run `node tools/build-learn.mjs` from the repo root, then commit the output.
 // Netlify still has no build step; it serves the committed files.
 //
@@ -87,7 +88,7 @@ const FOOT = `<footer>
       <span class="wordmark" role="img" aria-label="Retune">RETUN<span class="bars" aria-hidden="true"><i></i><i></i><i></i></span></span>
       <span>Retune Physio · ABN 75 662 599 148</span>
       <span>hello@retunephysio.com.au</span>
-      <span><a href="/">Home</a> · <a href="/learn/">Learn</a></span>
+      <span><a href="/">Home</a> · <a href="/learn/">Learn</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></span>
     </div>
     <div class="stack narrow">
       <span>Retune is a general wellness app that helps adults build and keep an exercise habit. It doesn't diagnose, monitor or treat any condition, and it doesn't replace your physio or doctor.</span>
@@ -228,14 +229,87 @@ for (const a of all) {
 }
 writeFileSync(join(ROOT, 'learn', 'index.html'), indexPage(all));
 
+
+// --- Privacy Policy and Terms of Use (content/legal/*.md) ---------------------------------------------------------
+// The text is the approved version from the "Retune: Privacy Policy, Collection Notice and Terms" doc (version in the
+// first line). Only a small part of Markdown is used: ### headings, paragraphs, - lists, | tables |, **bold**, *italic*.
+const inlineMd = (t) =>
+  esc(t)
+    .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
+    .replace(/\*(.+?)\*/g, '<i>$1</i>')
+    .replace(/hello@retunephysio\.com\.au/g, '<a href="mailto:hello@retunephysio.com.au">hello@retunephysio.com.au</a>');
+function mdToHtml(md) {
+  const out = [];
+  const blocks = md.trim().split(/\n\s*\n/);
+  for (const b of blocks) {
+    const lines = b.split('\n');
+    if (lines[0].startsWith('### ')) out.push(`<h2>${inlineMd(lines[0].slice(4))}</h2>`);
+    else if (lines.every((l) => l.startsWith('- '))) out.push(`<ul>${lines.map((l) => `<li>${inlineMd(l.slice(2))}</li>`).join('')}</ul>`);
+    else if (lines.every((l) => l.startsWith('|'))) {
+      const rows = lines.map((l) => l.replace(/^\|\s*|\s*\|$/g, '').split(/\s*\|\s*/));
+      const [h, ...body] = rows;
+      out.push(`<div class="table-wrap"><table><thead><tr>${h.map((c) => `<th scope="col">${inlineMd(c)}</th>`).join('')}</tr></thead><tbody>${body.map((r) => `<tr>${r.map((c) => `<td>${inlineMd(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`);
+    } else out.push(`<p>${inlineMd(lines.join(' '))}</p>`);
+  }
+  return out.join('\n');
+}
+const legalPages = [
+  { slug: 'privacy', file: 'privacy.md', title: 'Privacy Policy', seo: 'Privacy Policy | Retune', description: 'How Retune Physio collects, uses, stores and protects your information in the Retune app and on retunephysio.com.au.' },
+  { slug: 'terms', file: 'terms.md', title: 'Terms of Use', seo: 'Terms of Use | Retune', description: "The terms for using the Retune app: what it is and isn't, your information, price, and your rights under Australian Consumer Law." },
+];
+let legalUpdated = '';
+for (const p of legalPages) {
+  const md = readFileSync(join(ROOT, 'content', 'legal', p.file), 'utf8');
+  const version = (md.match(/Version (\d{4}-\d{2}-\d{2})/) || [])[1];
+  if (!version) throw new Error(`${p.file}: no version line`);
+  legalUpdated = version > legalUpdated ? version : legalUpdated;
+  // Same word rules as the articles, except "guarantee": the terms must name the consumer guarantees (ACL).
+  for (const re of [/\bstreaks?\b/i, /\bin a row\b/i, /\bbadges?\b/i, /\bcure[sd]?\b/i, /\bheal(s|ing)?\b/i]) if (re.test(md)) throw new Error(`${p.file}: banned word ${re}`);
+  const url = `${SITE}/${p.slug}/`;
+  const html = `${head({ title: p.seo, description: p.description, url, type: 'website' })}<main>
+<article class="article legal">
+  <div class="wrap">
+    <header class="art-head"><h1>${esc(p.title)}</h1></header>
+    <div class="prose">
+${mdToHtml(md)}
+    </div>
+  </div>
+</article>
+</main>
+${FOOT}`;
+  mkdirSync(join(ROOT, p.slug), { recursive: true });
+  writeFileSync(join(ROOT, p.slug, 'index.html'), html);
+}
+
+// --- Pilot sign-up thanks page (the form on the home page posts here through Netlify Forms) -----------------------
+mkdirSync(join(ROOT, 'pilot', 'thanks'), { recursive: true });
+writeFileSync(
+  join(ROOT, 'pilot', 'thanks', 'index.html'),
+  `${head({ title: 'Thanks for your interest | Retune', description: 'Thanks for asking to join the Retune pilot.', url: `${SITE}/pilot/thanks/`, type: 'website', extra: '<meta name="robots" content="noindex">\n' })}<main>
+<article class="article">
+  <div class="wrap">
+    <header class="art-head"><h1>Thanks, we've got your details.</h1></header>
+    <div class="prose">
+      <p>Adam will email you within a few days from hello@retunephysio.com.au with what the pilot involves. Joining is up to you.</p>
+      <p>Places are limited, and the pilot starts on Android phones. If it's full, or you have an iPhone, we'll keep you on the list for the next round.</p>
+      <p><a href="/">Back to the home page</a> · <a href="/learn/">Read the Learn guides</a></p>
+    </div>
+  </div>
+</article>
+</main>
+${FOOT}`,
+);
+
 const newest = all.map((a) => a.updated).sort().pop();
 const urls = [
   { loc: `${SITE}/`, lastmod: newest },
   { loc: `${SITE}/learn/`, lastmod: newest },
   ...all.map((a) => ({ loc: `${SITE}/learn/${a.slug}/`, lastmod: a.updated })),
+  { loc: `${SITE}/privacy/`, lastmod: legalUpdated },
+  { loc: `${SITE}/terms/`, lastmod: legalUpdated },
 ];
 writeFileSync(
   join(ROOT, 'sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${u.loc}</loc><lastmod>${u.lastmod}</lastmod></url>`).join('\n')}\n</urlset>\n`,
 );
-console.log(`Built ${all.length} articles, learn/index.html and sitemap.xml`);
+console.log(`Built ${all.length} articles, learn/index.html, privacy, terms, pilot/thanks and sitemap.xml`);

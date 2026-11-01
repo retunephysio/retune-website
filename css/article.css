@@ -51,3 +51,10 @@ section.refs{margin-top:36px;border-top:1px solid var(--line);padding:20px 0 0;f
 .learn-list h2{font-size:1.15rem}
 .learn-list p{color:var(--muted);font-size:.95rem}
 .learn-list .meta{font-size:.82rem;color:var(--muted)}
+
+/* Privacy Policy and Terms of Use tables: scroll sideways on a phone rather than squash. */
+.legal .table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+.legal table{border-collapse:collapse;width:100%;min-width:560px;font-size:.92rem}
+.legal th,.legal td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+.legal th{font-weight:600;background:var(--card)}
+.legal tr:last-child td{border-bottom:0}

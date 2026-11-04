@@ -58,3 +58,41 @@ section.refs{margin-top:36px;border-top:1px solid var(--line);padding:20px 0 0;f
 .legal th,.legal td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
 .legal th{font-weight:600;background:var(--card)}
 .legal tr:last-child td{border-bottom:0}
+
+/* Tables inside article and product pages: scroll sideways on a phone rather than squash. */
+.prose .table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:12px 0}
+.prose table{border-collapse:collapse;width:100%;min-width:520px;font-size:.92rem}
+.prose th,.prose td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+.prose thead th{font-weight:600;background:var(--card)}
+.prose tbody th{font-weight:600}
+.prose tr:last-child td,.prose tr:last-child th{border-bottom:0}
+.product .lede{margin-top:12px}
+.feature-list{display:flex;flex-direction:column;gap:10px}
+
+/* Printable exercise log (learn/printable-physio-exercise-log). On screen it sits in a card; when printed, only the
+   log prints, on one A4 page, in black on white. */
+.print-log{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin:20px 0}
+.print-log h2{margin-top:0}
+.print-log .log-fields{display:flex;flex-wrap:wrap;gap:8px 24px;margin:8px 0}
+.print-log .log-key,.print-log .log-foot{font-size:.85rem;color:var(--muted)}
+.prose .log-table{min-width:640px}
+.log-table td{height:34px}
+.log-table th:nth-child(n+3),.log-table td:nth-child(n+3){width:9%;text-align:center}
+.log-table tbody td,.log-table tbody th{border:1px solid var(--line)}
+.print-log .log-notes{margin-top:12px}
+.print-log p{overflow-wrap:anywhere}
+
+@media print{
+  @page{size:A4 landscape;margin:10mm}
+  body:has(.print-log) :is(header.top,footer,.crumbs,.art-head,.summary-box,.app-box,.refs,.disclaimer,.related),
+  body:has(.print-log) .prose > :not(.print-log){display:none !important}
+  body:has(.print-log),body:has(.print-log) main,body:has(.print-log) .article,body:has(.print-log) .wrap{margin:0;padding:0;background:#fff;max-width:none}
+  body:has(.print-log) .print-log{margin:0;border:0;padding:0;background:#fff;color:#000;break-inside:avoid}
+  body:has(.print-log) .print-log h2{font-size:16pt;margin:0 0 4px}
+  body:has(.print-log) .print-log .table-wrap{overflow:visible;border:0;margin:6px 0}
+  .log-table{min-width:0 !important;width:100%;font-size:10pt}
+  .log-table th,.log-table td{border:1px solid #555 !important;color:#000;background:#fff !important;padding:4px 6px !important}
+  .log-table td{height:26px}
+  .print-log p{margin:4px 0}
+  .print-log .log-key,.print-log .log-foot{color:#333;font-size:9pt}
+}

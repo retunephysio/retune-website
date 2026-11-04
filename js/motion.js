@@ -69,7 +69,7 @@
   /* ---------- 2. Wordmark: the three bars start out of line and slide level ---------- */
   const OFFSETS = [-38, 30, -18];                                 // % of bar width; about 4-5 px at header size
   const retune = (wordmark, vars = {}) => {
-    const bars = $$('.bars i', wordmark);
+    const bars = $$('.bars i, .bars rect', wordmark); // CSS wordmark or the SVG logo
     if (bars.length !== 3) return;
     gsap.from(bars, {
       xPercent: (i) => OFFSETS[i], opacity: 0.35,
@@ -322,9 +322,9 @@
   mm.add(PHONE_DEMO, guarded(playDemoOnce));
 
   mm.add('(prefers-reduced-motion: no-preference)', guarded(() => {
-    const header = $('header.top .wordmark[data-retune]');
+    const header = $('header.top [data-retune]');
     if (header) retune(header, { delay: 0.35 });
-    const footer = $('footer .wordmark[data-retune]');
+    const footer = $('footer [data-retune]');
     if (footer) retune(footer, { scrollTrigger: { trigger: footer, start: 'top 95%', once: true } });
 
     heroIntro();

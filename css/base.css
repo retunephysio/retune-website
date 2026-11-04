@@ -15,12 +15,20 @@ a{color:var(--sage-ink)}
 .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
 .btn:focus-visible,.copy:focus-visible,a:focus-visible{outline:3px solid var(--sage);outline-offset:3px}
 
-/* wordmark: RETUN + three stacked bars standing in for the E */
-.wordmark{white-space:nowrap;font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:.12em;line-height:1;color:var(--ink)}
-.wordmark .bars{display:inline-block;vertical-align:baseline;width:.58em;height:.702em;margin-left:.06em}
-.wordmark .bars i{display:block;height:.176em;background:var(--sage)}
+/* Logo (brand v2, 5 Nov 2026): the wordmark SVG in the header, footer and 404. Forest on cream, cream on dark, via --logo;
+   the middle bar is terracotta in the SVG itself. */
+.logo{display:block;height:17px;width:auto;color:var(--logo)}
+footer .logo,.notfound .logo{align-self:flex-start} /* left-aligned in column layouts (a flex column would stretch it) */
+
+/* wordmark: RETUN + three stacked bars standing in for the E (the phone mock-up and physio summary card).
+   Montserrat ExtraBold; outer bars match the letters, middle bar terracotta, rounded ends. */
+.wordmark{white-space:nowrap;font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:.06em;line-height:1;color:var(--logo)}
+.wordmark .bars{display:inline-block;vertical-align:baseline;width:.58em;height:.702em;margin-left:0}
+.wordmark .bars i{display:block;height:.176em;background:var(--logo);border-radius:.088em}
 .wordmark .bars i+i{margin-top:.087em}
-.wordmark .bars i:nth-child(2){background:var(--terra)} /* middle bar terracotta, like the app icon (31 Oct 2026) */
+.wordmark .bars i:nth-child(2){background:#c07b5c}
+/* On the forest panels the wordmark goes cream */
+.week .wordmark,.pilot .box .wordmark{--logo:#f7f5f0}
 
 header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px}

@@ -1,25 +1,28 @@
-/* Design tokens: copied unchanged from the live site. */
+/* Design tokens: brand v2 (locked 5 Nov 2026), from the RETUNE PHYSIO design system. Forest #2f4535 is the main colour. */
 :root{
-  --bg:#f7f5f0; --card:#ffffff; --band:#eef2ea; --line:#e4dfd5;
-  --ink:#2b2b2b; --muted:#5e5a54;
-  --sage:#7c9473; --sage-block:#637a5a; --sage-ink:#3c4e37; --on-sage:#f7f5f0;
-  --btn:#4f6448; --on-btn:#f7f5f0;
-  --terra:#c97b5e; --terra-ink:#9e5236; --terra-tint:#f3e6df;
-  --display:"Poppins","Archivo Black",system-ui,sans-serif;
+  --bg:#f7f5f0; --card:#ffffff; --band:#edf0e8; --line:#e5e1d8;
+  --ink:#2b2b2b; --muted:#5f5b55;
+  --sage:#7f9472; --sage-block:#2f4535; --sage-ink:#2f4535; --on-sage:#f7f5f0;
+  --btn:#2f4535; --on-btn:#f7f5f0;
+  --terra:#c07b5c; --terra-ink:#8a4b30; --terra-tint:#f3e4dc;
+  --logo:#2f4535;
+  --display:"Montserrat",system-ui,sans-serif;
   --sans:"Work Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --shadow:0 24px 60px -24px rgba(60,78,55,.35);
+  --shadow:0 24px 60px -24px rgba(47,69,53,.4);
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#191b18; --card:#232621; --band:#20251f; --line:#33372f;
-  --ink:#ece8df; --muted:#aaa59a;
-  --sage:#8fa885; --sage-block:#4d6146; --sage-ink:#bcd3b0; --on-sage:#f2efe8;
-  --btn:#a7bf9b; --on-btn:#161815;
-  --terra:#d38f74; --terra-ink:#e7a88e; --terra-tint:#3a2a22;
+  --bg:#141a16; --card:#1c241e; --band:#18201a; --line:#2d3830;
+  --ink:#ece8df; --muted:#aaa79d;
+  --sage:#8fa885; --sage-block:#2f4535; --sage-ink:#c3d6b8; --on-sage:#f7f5f0;
+  --btn:#f7f5f0; --on-btn:#2f4535;
+  --terra:#d08f72; --terra-ink:#e7a88e; --terra-tint:#3a2a22;
+  --logo:#f7f5f0;
   --shadow:0 24px 60px -24px rgba(0,0,0,.6); color-scheme:dark }}
 :root[data-theme="dark"]{
-  --bg:#191b18; --card:#232621; --band:#20251f; --line:#33372f;
-  --ink:#ece8df; --muted:#aaa59a;
-  --sage:#8fa885; --sage-block:#4d6146; --sage-ink:#bcd3b0; --on-sage:#f2efe8;
-  --btn:#a7bf9b; --on-btn:#161815;
-  --terra:#d38f74; --terra-ink:#e7a88e; --terra-tint:#3a2a22;
+  --bg:#141a16; --card:#1c241e; --band:#18201a; --line:#2d3830;
+  --ink:#ece8df; --muted:#aaa79d;
+  --sage:#8fa885; --sage-block:#2f4535; --sage-ink:#c3d6b8; --on-sage:#f7f5f0;
+  --btn:#f7f5f0; --on-btn:#2f4535;
+  --terra:#d08f72; --terra-ink:#e7a88e; --terra-tint:#3a2a22;
+  --logo:#f7f5f0;
   --shadow:0 24px 60px -24px rgba(0,0,0,.6); color-scheme:dark }

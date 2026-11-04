@@ -25,7 +25,7 @@ section.summary-box{background:var(--band);border-radius:16px;padding:18px 20px;
 .prose sup a{text-decoration:none;font-size:.75em;padding-inline:1px}
 .prose .note{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
 
-.app-box{margin-top:36px;background:#4f6448;color:var(--on-sage);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:12px}
+.app-box{margin-top:36px;background:var(--sage-block);color:var(--on-sage);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:12px}
 .app-box h2{color:var(--on-sage);font-size:1.25rem;margin:0}
 .app-box p{color:var(--on-sage)}
 .app-box .btn{align-self:flex-start;background:var(--card);color:var(--ink)}

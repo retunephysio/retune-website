@@ -1,4 +1,4 @@
-// Builds the Learn section from content/learn/*.html, the Privacy Policy and Terms of Use from content/legal/*.md,
+// Builds the Learn section from content/learn/*.html, product pages from content/pages/*.html, the Privacy Policy and Terms of Use from content/legal/*.md,
 // the pilot sign-up thanks page, and sitemap.xml.
 // No dependencies: run `node tools/build-learn.mjs` from the repo root, then commit the output.
 // Netlify still has no build step; it serves the committed files.
@@ -95,7 +95,7 @@ const FOOT = `<footer>
       <svg class="logo" role="img" aria-label="Retune" viewBox="80 80 1261 200" xmlns="http://www.w3.org/2000/svg"><title>Retune</title><path fill="currentColor" d="M80.108 276.078V80H167.783Q210.64 80 233.749 99.468Q256.859 118.936 256.859 152.549Q256.859 174.678 246.214 190.644Q236.13 206.05 218.483 214.454L260.78 276.078H201.396L165.822 223.978H135.57V276.078ZM135.57 181.12H166.382Q183.749 181.12 192.293 173.557Q200.836 165.994 200.836 152.549Q200.836 138.824 192.293 131.261Q183.749 123.697 166.382 123.697H135.57ZM304.197 276.078V80H457.979V122.857H359.099V155.91H446.214V197.367H359.099V233.221H461.62V276.078ZM550.976 276.078V123.978H490.752V80H666.382V123.978H606.438V276.078ZM794.394 280Q750.976 280 726.606 256.19Q702.237 232.381 702.237 188.683V80H757.699V187.003Q757.699 212.213 767.643 223.137Q777.587 234.062 794.954 234.062Q812.321 234.062 822.125 223.137Q831.929 212.213 831.929 187.003V80H886.55V188.683Q886.55 232.381 862.181 256.19Q837.811 280 794.394 280ZM940.892 276.078V80H986.55L1073.105 184.482V80H1127.447V276.078H1081.789L995.234 171.597V276.078Z"/><g class="bars"><rect x="1183.469" y="80" width="157.423" height="49.02" rx="24.51" fill="currentColor"/><rect x="1183.469" y="153.529" width="157.423" height="49.02" rx="24.51" fill="#c07b5c"/><rect x="1183.469" y="227.059" width="157.423" height="49.02" rx="24.51" fill="currentColor"/></g></svg>
       <span>Retune Physio · ABN 75 662 599 148</span>
       <span>hello@retunephysio.com.au</span>
-      <span><a href="/">Home</a> · <a href="/learn/">Learn</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></span>
+      <span><a href="/">Home</a> · <a href="/physio-exercise-tracker/">Exercise tracker</a> · <a href="/learn/">Learn</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></span>
     </div>
     <div class="stack narrow">
       <span>Retune is a general wellness app that helps adults build and keep an exercise habit. It doesn't diagnose, monitor or treat any condition, and it doesn't replace your physio or doctor.</span>
@@ -288,6 +288,57 @@ ${FOOT}`;
   writeFileSync(join(ROOT, p.slug, 'index.html'), html);
 }
 
+// --- Product pages (content/pages/*.html): same meta block as articles, but no byline, summary or "Read next" ------
+// FIELDS: slug, eyebrow, title, seoTitle (<= 60 chars), description (<= 160), lede, updated (YYYY-MM-DD), references [{ text, url }].
+const PAGES_SRC = join(ROOT, 'content', 'pages');
+const productPages = readdirSync(PAGES_SRC).filter((f) => f.endsWith('.html')).sort().map((f) => {
+  const raw = readFileSync(join(PAGES_SRC, f), 'utf8');
+  const m = raw.match(/^\s*<script type="application\/json" id="meta">([\s\S]*?)<\/script>/);
+  if (!m) throw new Error(`pages/${f}: missing meta block`);
+  const p = JSON.parse(m[1]);
+  for (const k of ['slug', 'eyebrow', 'title', 'seoTitle', 'description', 'lede', 'updated']) if (p[k] === undefined) throw new Error(`pages/${f}: missing ${k}`);
+  if (p.seoTitle.length > 60) throw new Error(`pages/${f}: seoTitle is ${p.seoTitle.length} chars (max 60)`);
+  if (p.description.length > 160) throw new Error(`pages/${f}: description is ${p.description.length} chars (max 160)`);
+  const body = raw.slice(m[0].length).trim();
+  for (const re of [/\bstreaks?\b/i, /\bin a row\b/i, /\bbadges?\b/i, /\bcure[sd]?\b/i, /\bheal(s|ing)?\b/i, /\bguarantee/i]) if (re.test(body) || re.test(p.title) || re.test(p.lede)) throw new Error(`pages/${f}: banned word ${re}`);
+  return { ...p, references: p.references || [], body };
+});
+for (const p of productPages) {
+  const url = `${SITE}/${p.slug}/`;
+  const ld = [
+    { '@context': 'https://schema.org', '@type': 'WebPage', name: p.title, description: p.description, url, inLanguage: 'en-AU', dateModified: p.updated, publisher: { '@id': `${SITE}/#org` }, ...(p.references.length ? { citation: p.references.map((r) => r.url) } : {}) },
+    { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` }, { '@type': 'ListItem', position: 2, name: p.title, item: url }] },
+  ];
+  const html = `${head({ title: p.seoTitle, description: p.description, url, type: 'website', extra: `<script type="application/ld+json">${jsonLd(ld)}</script>\n` })}<main>
+<nav class="crumbs wrap" aria-label="Breadcrumb"><a href="/">Home</a></nav>
+<article class="article product">
+  <div class="wrap">
+    <header class="art-head">
+      <span class="eyebrow">${esc(p.eyebrow)}</span>
+      <h1>${esc(p.title)}</h1>
+      <p class="lede">${esc(p.lede)}</p>
+      <p><a class="btn" href="/#pilot">Join the pilot</a></p>
+    </header>
+    <div class="prose">
+${p.body}
+    </div>
+    <aside class="app-box" aria-labelledby="app-box-h">
+      <h2 id="app-box-h">Try Retune in the pilot</h2>
+      <p>We're testing Retune with a small group on Android first. It's free while in testing, and you can leave at any time.</p>
+      <a class="btn" href="/#pilot">Join the pilot</a>
+    </aside>
+    ${p.references.length ? `<section class="refs" aria-labelledby="refs-h">
+      <h2 id="refs-h">Research referred to</h2>
+      <ol>${p.references.map((r, i) => `<li id="ref-${i + 1}">${esc(r.text)} <a href="${esc(r.url)}" rel="noopener">${esc(r.url.replace(/^https?:\/\//, ''))}</a></li>`).join('')}</ol>
+    </section>` : ''}
+  </div>
+</article>
+</main>
+${FOOT}`;
+  mkdirSync(join(ROOT, p.slug), { recursive: true });
+  writeFileSync(join(ROOT, p.slug, 'index.html'), html);
+}
+
 // --- Pilot sign-up thanks page (the form on the home page posts here through Netlify Forms) -----------------------
 mkdirSync(join(ROOT, 'pilot', 'thanks'), { recursive: true });
 writeFileSync(
@@ -311,6 +362,7 @@ const newest = all.map((a) => a.updated).sort().pop();
 const urls = [
   { loc: `${SITE}/`, lastmod: newest },
   { loc: `${SITE}/learn/`, lastmod: newest },
+  ...productPages.map((p) => ({ loc: `${SITE}/${p.slug}/`, lastmod: p.updated })),
   ...all.map((a) => ({ loc: `${SITE}/learn/${a.slug}/`, lastmod: a.updated })),
   { loc: `${SITE}/privacy/`, lastmod: legalUpdated },
   { loc: `${SITE}/terms/`, lastmod: legalUpdated },

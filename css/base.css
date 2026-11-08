@@ -103,6 +103,8 @@ section{padding-block:72px}
 /* principles */
 .principles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 40px}
 @media (max-width:700px){.principles{grid-template-columns:minmax(0,1fr)}}
+.more-link{margin-top:24px;font-weight:600}
+.more-link a{color:var(--sage-ink);text-underline-offset:3px;display:inline-block;min-height:44px;line-height:44px}
 .principles div{display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--line);padding-top:16px}
 .principles p{color:var(--muted)}
 .quote{font-family:var(--display);font-weight:600;color:var(--sage-ink)}

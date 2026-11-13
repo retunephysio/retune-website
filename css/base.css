@@ -12,8 +12,8 @@ a{color:var(--sage-ink)}
 .lede{font-size:1.15rem;color:var(--muted);max-width:34em}
 .muted{color:var(--muted)}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 24px;border-radius:14px;background:var(--btn);color:var(--on-btn);font-weight:600;font-size:1rem;text-decoration:none;border:0;cursor:pointer;font-family:var(--sans)}
-.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
-.btn:focus-visible,.copy:focus-visible,a:focus-visible{outline:3px solid var(--sage);outline-offset:3px}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--control-border)}
+.btn:focus-visible,.copy:focus-visible,a:focus-visible{outline:3px solid var(--sage-ink);outline-offset:3px}
 
 /* Logo (brand v2, 5 Nov 2026): the wordmark SVG in the header, footer and 404. Forest on cream, cream on dark, via --logo;
    the middle bar is terracotta in the SVG itself. */
@@ -162,7 +162,7 @@ section{padding-block:72px}
 .mail .lbl{font-size:.9rem}
 .mail .addr{font-family:var(--display);font-weight:600;font-size:1.15rem;word-break:break-all;user-select:all}
 .mail .row{display:flex;flex-wrap:wrap;gap:10px}
-.copy{min-height:44px;padding:0 16px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font-weight:600;font-family:var(--sans);font-size:.95rem;cursor:pointer}
+.copy{min-height:44px;padding:0 16px;border-radius:12px;border:1.5px solid var(--control-border);background:var(--bg);color:var(--ink);font-weight:600;font-family:var(--sans);font-size:.95rem;cursor:pointer}
 .mail .btn{min-height:44px;font-size:.95rem;padding:0 16px}
 .mail ul{margin:0;padding-left:1.1em;font-size:.9rem;color:var(--muted);display:flex;flex-direction:column;gap:4px}
 /* Pilot sign-up form (Netlify Forms, 1 Nov 2026). Every control is at least 44px tall. */
@@ -171,9 +171,12 @@ section{padding-block:72px}
 .signup .field{display:flex;flex-direction:column;gap:6px;border:0;margin:0;padding:0;min-width:0}
 .signup label,.signup legend{font-weight:600;font-size:.95rem;padding:0}
 .signup .opt{font-weight:400;color:var(--muted)}
-.signup input[type=text],.signup input[type=email]{min-height:44px;box-sizing:border-box;width:100%;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
+.signup input[type=text],.signup input[type=email]{min-height:44px;box-sizing:border-box;width:100%;padding:8px 12px;border:1px solid var(--control-border);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
+/* A field the person has left wrong after trying: error border and tint. The words come from the browser's own message on submit. */
+.signup input:user-invalid{border-color:var(--error);border-width:2px;background:var(--error-tint)}
+.signup .choices:has(input:user-invalid) .choice,.signup .tick:has(input:user-invalid){border-color:var(--error);color:var(--error)}
 .signup .choices{display:flex;flex-wrap:wrap;gap:8px}
-.signup .choice{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border:1px solid var(--line);border-radius:999px;font-weight:500;cursor:pointer}
+.signup .choice{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border:1px solid var(--control-border);border-radius:999px;font-weight:500;cursor:pointer}
 .signup .choice:has(input:checked){border-color:var(--sage-ink);background:var(--band)}
 .signup .tick{display:flex;align-items:center;gap:10px;min-height:44px;font-weight:500}
 .signup input[type=radio],.signup input[type=checkbox]{width:20px;height:20px;accent-color:var(--sage-ink);margin:0}

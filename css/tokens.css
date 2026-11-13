@@ -5,6 +5,9 @@
   --sage:#7f9472; --sage-block:#2f4535; --sage-ink:#2f4535; --on-sage:#f7f5f0;
   --btn:#2f4535; --on-btn:#f7f5f0;
   --terra:#c07b5c; --terra-ink:#8a4b30; --terra-tint:#f3e4dc;
+  /* Errors and destructive actions only, always with words; terracotta is never an error colour. Control border = muted
+     (inputs, chips, ghost buttons: the hairline is only 1.2:1). Added 13 Nov 2026 (brand v2 additions). */
+  --error:#b3261e; --error-tint:#fbe9e6; --control-border:#5f5b55;
   --logo:#2f4535;
   --display:"Montserrat",system-ui,sans-serif;
   --sans:"Work Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -16,6 +19,7 @@
   --sage:#8fa885; --sage-block:#2f4535; --sage-ink:#c3d6b8; --on-sage:#f7f5f0;
   --btn:#f7f5f0; --on-btn:#2f4535;
   --terra:#d08f72; --terra-ink:#e7a88e; --terra-tint:#3a2a22;
+  --error:#f2b8b5; --error-tint:#3d1f1c; --control-border:#aaa79d;
   --logo:#f7f5f0;
   --shadow:0 24px 60px -24px rgba(0,0,0,.6); color-scheme:dark }}
 :root[data-theme="dark"]{
@@ -24,5 +28,6 @@
   --sage:#8fa885; --sage-block:#2f4535; --sage-ink:#c3d6b8; --on-sage:#f7f5f0;
   --btn:#f7f5f0; --on-btn:#2f4535;
   --terra:#d08f72; --terra-ink:#e7a88e; --terra-tint:#3a2a22;
+  --error:#f2b8b5; --error-tint:#3d1f1c; --control-border:#aaa79d;
   --logo:#f7f5f0;
   --shadow:0 24px 60px -24px rgba(0,0,0,.6); color-scheme:dark }

@@ -42,12 +42,12 @@
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chips input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
 .chips label{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;
-  border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font-size:.92rem;cursor:pointer;
+  border:1.5px solid var(--control-border);background:var(--bg);color:var(--ink);font-size:.92rem;cursor:pointer;
   transition:background-color .3s var(--ease-out,ease-out),border-color .3s var(--ease-out,ease-out),color .3s var(--ease-out,ease-out),transform .3s var(--ease-out,ease-out)}
 .chips input:checked + label{background:var(--btn);border-color:var(--btn);color:var(--on-btn)}
-.chips input:focus-visible + label{outline:3px solid var(--sage);outline-offset:3px}
+.chips input:focus-visible + label{outline:3px solid var(--sage-ink);outline-offset:3px}
 .chips label:active{transform:scale(.97)}
-@media (hover:hover) and (pointer:fine){.chips input:not(:checked) + label:hover{border-color:var(--sage)}}
+@media (hover:hover) and (pointer:fine){.chips input:not(:checked) + label:hover{border-color:var(--sage-ink)}}
 
 /* ---- Six-week grid (Progress card) ---- */
 .weeks{display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--line);padding-top:12px}

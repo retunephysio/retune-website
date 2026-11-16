@@ -2,7 +2,7 @@
 // For the pilot form it emails the matching "thanks for signing up" reply from hello@ through Resend.
 // Needs the environment variable RESEND_API_KEY (a send-only key for retunephysio.com.au), set in Netlify,
 // never in git. Logs never include names or email addresses.
-import { pilotReply } from "./pilot-reply.mjs";
+import { pilotReply } from "../lib/pilot-reply.mjs";
 
 export const handler = async (event) => {
   let payload;

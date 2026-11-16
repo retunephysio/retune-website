@@ -3,6 +3,10 @@
 [build]
   publish = "."
 
+# One function: emails the pilot form's "thanks for signing up" reply (submission-created event).
+[functions]
+  directory = "netlify/functions"
+
 # Basic security headers for every page.
 [[headers]]
   for = "/*"

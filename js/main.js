@@ -46,3 +46,26 @@
     } catch (e) { fallback(); }
   });
 })();
+
+/* Pilot form: one tap sends one sign-up. On a slow phone connection the page can take a few seconds
+   to move to "thanks", and every extra tap of "Ask to join" sent the form again (doubles and triples
+   seen 17-24 Nov 2026). The first valid submit goes through as normal; later taps are ignored.
+   Coming back with the Back button restores the button so the form can be sent again on purpose. */
+(function () {
+  'use strict';
+  var form = document.querySelector('form[name="pilot"]');
+  if (!form) return;
+  var btn = form.querySelector('button[type="submit"]');
+  var label = btn ? btn.textContent : '';
+  var sending = false;
+  form.addEventListener('submit', function (e) {
+    if (sending) { e.preventDefault(); return; }
+    sending = true;
+    if (btn) { btn.setAttribute('aria-disabled', 'true'); btn.textContent = 'Sending…'; }
+  });
+  window.addEventListener('pageshow', function (e) {
+    if (!e.persisted) return;
+    sending = false;
+    if (btn) { btn.removeAttribute('aria-disabled'); btn.textContent = label; }
+  });
+})();

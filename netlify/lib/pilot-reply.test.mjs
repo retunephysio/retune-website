@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { pilotReply } from "./pilot-reply.mjs";
+import { pilotReply, replyKey } from "./pilot-reply.mjs";
 
 const base = { "first-name": "Sam", email: " Sam@Example.com ", phone: "Android", "play-email": "sam.p@gmail.com", adult: "yes" };
 
@@ -39,4 +39,14 @@ test("missing name says 'there'; odd Play email is left out", () => {
   const r = pilotReply("pilot", { ...base, "first-name": "  ", "play-email": "nope" });
   assert.match(r.text, /^Hi there,/);
   assert.match(r.text, /gave on the form, so/);
+});
+
+test("reply key: same address (any case or spacing) on the same day gives one key, with no address in it", () => {
+  const day = new Date("2026-11-24T08:00:00Z");
+  const a = replyKey("Sam@Example.com", day);
+  assert.equal(a, replyKey(" sam@example.com ", new Date("2026-11-24T23:59:00Z")));
+  assert.match(a, /^pilot-[0-9a-f]{32}-2026-11-24$/);
+  assert.ok(!a.includes("sam"), "no email address in the key");
+  assert.notEqual(a, replyKey("sam@example.com", new Date("2026-11-25T00:00:00Z")), "a new day can send again");
+  assert.notEqual(a, replyKey("other@example.com", day));
 });

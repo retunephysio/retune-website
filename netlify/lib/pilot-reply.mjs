@@ -1,6 +1,8 @@
 // The two "thanks for signing up" emails for the pilot form, kept apart from the sending code so they can be tested.
 // Wording approved by Adam as Gmail templates 1 (Android) and 2 (iPhone), 13 Nov 2026. No health details, ever.
 
+import { createHash } from "node:crypto";
+
 const PRIVACY = "https://retunephysio.com.au/privacy/";
 const SIGN_OFF = ["Thanks again,", "Adam", "Retune Physio", "hello@retunephysio.com.au"];
 
@@ -86,4 +88,14 @@ export function pilotReply(formName, data) {
       .join("") +
     "</div>";
   return { to: email, subject: paras.subject, text, html, template: phone === "Android" ? "android" : "iphone" };
+}
+
+/**
+ * Resend idempotency key for a welcome email: one per email address per UTC day. Resend keeps a key for
+ * 24 hours, so a person who sends the form two or three times in a row gets one email, not several.
+ * The address is hashed so the key (which Resend logs) holds no personal information.
+ */
+export function replyKey(to, now = new Date()) {
+  const hash = createHash("sha256").update(String(to).trim().toLowerCase()).digest("hex").slice(0, 32);
+  return `pilot-${hash}-${now.toISOString().slice(0, 10)}`;
 }
